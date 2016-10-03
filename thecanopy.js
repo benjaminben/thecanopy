@@ -4,7 +4,9 @@ var boosh = 'booooo\nooooooooooooooooosh';
 
 (function () {
 
-  var gs = {};
+  var gs = {
+    deck : document.getElementById('deck'),
+  };
 
   var Slide = function(content){
     var cont = document.createElement('div'),
@@ -21,6 +23,9 @@ var boosh = 'booooo\nooooooooooooooooosh';
     text_cont.id = `slide_${index}_text_cont`;
     text.id      = `slide_${index}_text`;
 
+    text_cont.className = 'slide-text-cont';
+    text.className = 'slide-text';
+
     text.innerHTML = content.text;
 
     text_cont.appendChild(text);
@@ -28,7 +33,8 @@ var boosh = 'booooo\nooooooooooooooooosh';
 
     cont.render = function(){
       // cont.className += ' entering'
-      document.appendChild(cont);
+      console.log('burf')
+      gs.deck.appendChild(cont);
       setTimeout(function(){
         window.addEventListener('wheel', wheelin);
       }, 1000);
@@ -38,7 +44,7 @@ var boosh = 'booooo\nooooooooooooooooosh';
       cont.className += ' exiting';
       var next_slide = document.getElementById(`slide_${(forward ? index + 1 : index - 1)}`);
       setTimeout(function(){
-        document.body.removeChild(cont);
+        gs.deck.removeChild(cont);
         cont.className = cont.className.replace( /(?:^|\s)exiting(?!\S)/ , '' )
         next_slide.render();
       }, 1000);
@@ -112,14 +118,15 @@ var boosh = 'booooo\nooooooooooooooooosh';
       });
     });
   });
-  console.log('blug')
+
   Promise.all(slides).then(ss => {
-    // init(ss);
-    console.log(ss)
+    init(ss);
+    // console.log(ss)
   });
 
   function init(slides){
     gs.current_slide = slides[0];
+    slides[0].render();
     window.addEventListener('wheel', wheelin);
   }
 
