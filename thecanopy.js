@@ -221,7 +221,8 @@ var boosh = 'booooo\nooooooooooooooooosh';
     window.removeEventListener('mousemove', mousein);
   }
   function mousein(e){
-    if( e.clientX < (window.outerWidth * 0.2) && e.clientY < (window.outerHeight * 0.2) ){
+    console.log(e.clientX, window.outerWidth * 0.8, e.clientX > window.outerWidth * 0.8);
+    if( e.clientX > (window.outerWidth * 0.8) && e.clientY < (window.outerHeight * 0.2) ){
       gs.current_slide.showText();
     }
     else {
