@@ -1,27 +1,27 @@
 'use strict';
 
-var boosh = 'booooo\nooooooooooooooooosh';
-
 (function () {
 
   var gs = {
     deck: document.getElementById('deck')
   };
 
+  // For each slide, this guy will be the guy we always look to..
   var Slide = function Slide(content) {
+    // ..his root thang will be this dom element (trying to minimize objects)
     var cont = document.createElement('div'),
         index = content.index;
     cont.id = 'slide_' + index;
     cont.className = 'slide';
     cont.index = content.index;
 
-    cont.appendChild(content.img);
+    cont.appendChild(content.img); // The img we got and loaded in our promise
 
     var text_cont = document.createElement('span'),
         text = document.createElement('p');
 
     text_cont.id = 'slide_' + index + '_text_cont';
-    text.id = 'slide_' + index + '_text';
+    text.id = 'slide_' + index + '_text'; // Makin text...
 
     text_cont.className = 'slide-text-cont';
     text.className = 'slide-text';
@@ -32,7 +32,8 @@ var boosh = 'booooo\nooooooooooooooooosh';
     cont.appendChild(text_cont);
 
     cont.render = function () {
-      // cont.className += ' entering'
+      // yea so, the slide's methods are stored
+      // on the dom element that is the slide..
       gs.deck.appendChild(cont);
       gs.current_slide = slides[index];
       setTimeout(function () {
@@ -41,6 +42,7 @@ var boosh = 'booooo\nooooooooooooooooosh';
     };
 
     cont.transition = function (forward) {
+      // slippin ya slides
       if (forward && gs.current_slide === slides[slides.length - 1] || !forward && gs.current_slide === slides[0]) {
         return false;
       }
@@ -69,12 +71,14 @@ var boosh = 'booooo\nooooooooooooooooosh';
       }
       text.active = false;
       text.className = text.className.replace(/(?:^|\s)active(?!\S)/, '');
+      // it's kind of gnarly but why jquery if no need? need?
     };
 
     return cont;
   };
 
   var seeds = {
+    // would ideally come from a db
     cover: {
       background_img: './deck/slide_img_0.jpg',
       title_img: ''
@@ -136,9 +140,8 @@ var boosh = 'booooo\nooooooooooooooooosh';
         img.src = s.img_src;
         img.onload = function () {
           res({ img: img, index: i });
+          // resolve obj containing img
         };
-
-        // resolve obj containing img
       }).then(function (obj) {
         var req = new XMLHttpRequest();
         req.open('GET', s.text_src);
@@ -152,12 +155,12 @@ var boosh = 'booooo\nooooooooooooooooosh';
             if (req.status === 200) {
               obj.text = req.responseText;
               resolve(new Slide(obj));
+              // resolve slide containing img and text
             } else {
               console.log('error: ' + req.status);
             }
           }
         };
-        // resolve obj containing img_src and text_src
       });
     });
   });
@@ -170,8 +173,6 @@ var boosh = 'booooo\nooooooooooooooooosh';
     coverImg.onload = function () {
       return intro.cover();
     };
-
-    // console.log(ss)
   });
 
   var intro = {
@@ -226,7 +227,6 @@ var boosh = 'booooo\nooooooooooooooooosh';
     window.removeEventListener('mousemove', mousein);
   }
   function mousein(e) {
-    console.log(e.clientX, window.outerWidth * 0.8, e.clientX > window.outerWidth * 0.8);
     if (e.clientX > window.outerWidth * 0.8 && e.clientY < window.outerHeight * 0.2) {
       gs.current_slide.showText();
     } else {
