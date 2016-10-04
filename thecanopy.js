@@ -98,6 +98,27 @@ var boosh = 'booooo\nooooooooooooooooosh';
     }, {
       img_src: './deck/slide_img_8.jpg',
       text_src: './deck/8.txt'
+    }, {
+      img_src: './deck/slide_img_9.jpg',
+      text_src: './deck/9.txt'
+    }, {
+      img_src: './deck/slide_img_10.jpg',
+      text_src: './deck/10.txt'
+    }, {
+      img_src: './deck/slide_img_11.jpg',
+      text_src: './deck/11.txt'
+    }, {
+      img_src: './deck/slide_img_12.jpg',
+      text_src: './deck/12.txt'
+    }, {
+      img_src: './deck/slide_img_13.jpg',
+      text_src: './deck/13.txt'
+    }, {
+      img_src: './deck/slide_img_0.jpg',
+      text_src: './deck/14.txt'
+    }, {
+      img_src: './deck/slide_img_1.jpg',
+      text_src: './deck/15.txt'
     }]
   };
 
