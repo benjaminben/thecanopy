@@ -1,11 +1,11 @@
 html, body {
   margin: 0;
   height: 100%;
-  -webkit-overflow-scrolling: false;
 }
 
 body {
   background: black;
+  overflow: hidden;
 }
 
 #cover {
@@ -14,6 +14,15 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  display: flex;
+}
+#cover.exiting {
+  animation: fwoosh-out 0.5s ease forwards;
+}
+#cover svg {
+  margin: auto;
+  width: 66%;
+  max-width: 700px;
 }
 
 #deck {
@@ -31,6 +40,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: fwoosh-in 0.5s ease forwards;
+}
+#deck .slide.exiting {
+  animation: fwoosh-out 0.5s ease forwards;
 }
 #deck img {
   max-width: 100%;
@@ -43,8 +56,42 @@ body {
 #deck .slide-text-cont {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   height: 100%;
-  width: 33%;
-  max-width: 500px;
+  width: 100%;
+  display: table;
+}
+#deck .slide-text-cont .slide-text {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 3em;
+  color: #8b2c00;
+  font-family: 'Nothing You Could Do', cursive;
+  background-color: rgba(0,0,0,0.5);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+#deck .slide-text-cont .slide-text.active {
+  opacity: 1;
+}
+
+@keyframes fwoosh-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.66);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes fwoosh-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.33);
+  }
 }
