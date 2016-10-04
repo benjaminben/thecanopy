@@ -65,9 +65,10 @@ body {
   display: table-cell;
   vertical-align: middle;
   font-size: 3em;
-  color: #8b2c00;
-  font-family: 'Nothing You Could Do', cursive;
-  background-color: rgba(0,0,0,0.5);
+  /*color: #8b2c00;*/
+  color: #f1f1f1;
+  font-family: 'VT323', monospace;
+  background-color: rgba(0,0,0,0.66);
   opacity: 0;
   transition: opacity 0.25s ease;
 }
